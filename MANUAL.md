@@ -2,7 +2,7 @@
 1. Open this URL in a browser. The reddit user must be logged in. 
 https://www.reddit.com/api/v1/authorize?client_id=ohXpoqrZYub1kg&response_type=token&redirect_uri=http://localhost:65010/callback&scope=*&state=1234
 1. Click on **Agree**. This is using the "reddit on Android" app ID to obtain an access token used later.
-1. You will get redirected to `http://localhost:65010/callback#access_token=45450553-r7yurPDsI1HdfhTHUp-XcM7GPGQ&token_type=bearer&state=1234&expires_in=3600&scope=%2A` in your browser. It will show an error screen which is fine.
+1. You will get redirected to `http://localhost:65010/callback#access_token=45450553-r7yurPDsI1HdfhTHUp-XcM7GPGQ&token_type=bearer&state=1234&expires_in=3600&scope=%2A` in your browser. It will show an error screen which is fine. If youre doing all of this in a script, you should start a webserver on port 65010 and extract the access token from an incoming request. Note that there may be separate request for a favicon.
 1. Copy the `access_token` part from the URL you got redirrected to. `45450553-r7yurPDsI1HdfhTHUp-XcM7GPGQ` in this example.
 1. Make HTTP request to:
    - URL: `https://strapi.reddit.com/r/<subreddit>/broadcasts?title=<url_encoded_title>`
