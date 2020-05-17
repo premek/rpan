@@ -17,3 +17,6 @@ Now you have to open OBS, go to Settings -> Stream, select Service: Custom and f
  - Stream Key: (see the last line of the script output - `938baa45-180f-4e9e-932e-eaa0a45eaf2e` in this case - it is also copied to your clipboard so you can just paste it)
 
 ![OBS settings (c) Spikeedoo](https://github.com/Spikeedoo/SnooKey/blob/master/examples/snookey03.PNG)    
+
+
+[Read how it works here](MANUAL.md)
