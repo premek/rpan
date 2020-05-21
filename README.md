@@ -1,7 +1,14 @@
 This script allows you to start streaming to Reddit Public Access Network (RPAN) from OBS. It's written in bash and is tested to be running on Linux.
 Thanks to https://github.com/Spikeedoo/SnooKey and https://github.com/IOnlyPlayAsDrift/Snookey2 for the knowhow.
 
-Usage:
+If you dont use Linux or the script doesn't work for you it is easy to do the steps manually or implement it in another scripting language:
+
+[Read how it works here](MANUAL.md)
+
+## Installation
+- Just download the `rpan.sh` and make it executable.
+
+## Usage:
 ```
 $ ./rpan.sh SubredditName "stream title"
 ```
@@ -18,5 +25,3 @@ Now you have to open OBS, go to Settings -> Stream, select Service: Custom and f
 
 ![OBS settings (c) Spikeedoo](https://github.com/Spikeedoo/SnooKey/blob/master/examples/snookey03.PNG)    
 
-
-[Read how it works here](MANUAL.md)
