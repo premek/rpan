@@ -12,6 +12,23 @@ test -z "$sub" && usage
 title="$2"
 test -z "$title" && usage
 
+valid_subreddits=("pan" "AnimalsOnReddit" "distantsocializing" "GlamourSchool" "RedditInTheKitchen" "RedditMasterClasses" "RedditSessions" "talentShow" "TheArtistStudio" "TheGamerLounge" "TheYouShow" "whereintheworld")
+
+# validate user's subreddit input
+if [[ ! " ${valid_subreddits[@]} " =~ " ${sub} " ]]; then
+    echo "ERROR: $sub is not a valid RPAN subreddit!"
+    echo "RPAN SUBREDDITS:"
+    for s in ${valid_subreddits[@]}; do
+        echo -e "\\t[*] $s"
+    done
+    exit 1
+fi
+
+# let user know that r/pan is only available during specific hours
+if [[ $sub == "pan" ]]; then
+    echo "NOTICE: You are only able to stream to r/pan during specific hours.  Please visit reddit.com/r/pan to learn more."
+fi
+
 REDIR=$(cat <<EOF
 HTTP/1.1 200 OK
 
