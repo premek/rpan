@@ -12,6 +12,11 @@ test -z "$sub" && usage
 title="$2"
 test -z "$title" && usage
 
+# let user know that r/pan is only available during specific hours
+if [[ $sub == "pan" ]]; then
+    echo "NOTICE: You are only able to stream to r/pan during specific hours.  Please visit reddit.com/r/pan to learn more."
+fi
+
 REDIR=$(cat <<EOF
 HTTP/1.1 200 OK
 
@@ -45,6 +50,25 @@ test -z "$access_token" && get_access_token
 
 echo "Access Token: $access_token" # can be reused for 1 hour as an argument to this script
 
+# Get valid RPAN subreddits
+validate_subs=$(curl --location --request GET "https://strapi.reddit.com/recommended_broadcast_subreddits" \
+-H "User-Agent: Key/0.1" \
+-H "Authorization: Bearer $access_token");
+
+# Turn result into array
+valid_subreddits=($(echo "$validate_subs" | jq -r '.data[]'))
+# Append r/pan
+valid_subreddits=("pan" "${valid_subreddits[@]}")
+
+# validate user's subreddit input
+if [[ ! " ${valid_subreddits[@]} " =~ " ${sub} " ]]; then
+    echo "ERROR: $sub is not a valid RPAN subreddit!"
+    echo "RPAN SUBREDDITS:"
+    for s in ${valid_subreddits[@]}; do
+        echo -e "\\t[*] $s"
+    done
+    exit 1
+fi
 
 stream=$(curl -v -XPOST "https://strapi.reddit.com/r/$sub/broadcasts" \
     -G --data-urlencode "title=$title" \
